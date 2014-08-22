@@ -100,7 +100,7 @@ Then aggregate by grouping on "activity" and "subject" calculating the mean for 
 return result
 
 ## Completion
-Write global DF Data into the file "tidy.txt" using tabs as separators and avoids creating line numbers.codebook(Data)
+Write global DF Data into the file "tidy.txt" using tabs as separators and avoid line numbers.
  
  
 # See `CodeBook.md` for details on result and the variables
