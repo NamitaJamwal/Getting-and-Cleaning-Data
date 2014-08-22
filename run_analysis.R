@@ -1,8 +1,18 @@
 # Course Project assignment: create one R script called run_analysis.R that does the following. 
-# globals: Data,features, path, cols.in.scope
+# © Heinrich Krupp 2014 All Rights reserved.
+#
+# global data frames: Data, features
+# gobal values. path, cols.in.scope
+# functions:
+# - DownloadDataSet()
+# - LoadMergeData()
+# - ExtractData()
+# - DescriptiveVariables()
+# - SetActivityNames()
+# - MakeTidy()
 
 
-# Download and unzip the dat set from the given source and extract it locally
+# Download and unzip the data set from the given source and extract it locally
 DownloadDataSet= function(url) {
   if (!file.exists("data")) {
     #  Check for existing data directory or create it
