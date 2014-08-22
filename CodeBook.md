@@ -28,8 +28,8 @@ For each record in the tidy data it is provided:
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 - 79 features with the
--- Mean of Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
--- Mean of Triaxial Angular velocity from the gyroscope. 
+  - Mean of Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
+  - Mean of Triaxial Angular velocity from the gyroscope. 
 
 ## Variable names
 - activity
