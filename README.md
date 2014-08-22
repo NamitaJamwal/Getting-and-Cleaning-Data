@@ -47,8 +47,8 @@ Function: LoadMergeData()
 
 Following the assignment both training and test data sets shall be merged.
 Due to the fact that they reside in different subfolders the script addresses this while concatenating the common path with the individual subfolder and filenames into global value "path".
-Load the main file X_train.txt (resp. X_test.txt) into a data frame train.dat (resp. test.dat)
-then append the Y_train.txt( resp. Y_test.txt) and subject_train.txt(resp. subject_test.txt) to the data frames using read.csv()
+Load the main file `X_train.txt` (resp. `X_test.txt`) into a data frame train.dat (`resp. test.dat`)
+then append the `Y_train.txt`( resp. `Y_test.txt`) and subject_train.txt(resp. `subject_test.txt`) to the data frames using read.csv()
 Once all measurements are loaded, the two data frames train.dat and test.dat can be merged into a single data frame 
 
 return result
@@ -58,7 +58,7 @@ Function: ExtractData(df)
 
 
 According to the assignment only the features that contain mean and standard deviation are in scope.
-Read the file features.txt into a global data frame called "features" using read.csv().
+Read the file `features.txt` into a global data frame called "features" using read.csv().
 Perform a regex search for strings containing "-mean" or "-std" on the features list and store the result in a global vector called cols.in.scope
 Thus the features in scope are given and the resulting vector can be used to reduce DF "feature"
 To be able to reduce the DF "Data" add the columns ID for variable "activity" and "subject" to the vector col.in.scope
@@ -70,7 +70,7 @@ return result
 ## 3. Use Descriptive activity names (due to script design will be performed after step 4.)
 Function: SetActivityNames(df)
 
-The activity labels are declared in the file activity_labels.txt.
+The activity labels are declared in the file `activity_labels.txt`.
 Load file into a DF "activity.Labels" using read.csv().
 Loop through input data frame and replace activity IDs with their matching lables.
 return result
@@ -100,10 +100,10 @@ Then aggregate by grouping on "activity" and "subject" calculating the mean for 
 return result
 
 ## Completion
-Write global DF Data into the file "tidy.txt" using tabs as separators and avoid line numbers.
+Write global DF Data into the file `tidy.txt` using tabs as separators and avoid line numbers.
  
  
-# See `CodeBook.md` for details on result and the variables
+## See `CodeBook.md` for details on result and the variables
 
 # Coding conventions
 
