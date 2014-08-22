@@ -3,7 +3,7 @@
 
 
 # Download and unzip the dat set from the given source and extract it locally
-download.data.set= function(url) {
+DownloadDataSet= function(url) {
   if (!file.exists("data")) {
     #  Check for existing data directory or create it
     message("create data folder...")
@@ -22,7 +22,7 @@ download.data.set= function(url) {
 
 
 # 0. load the train and test files 
-load.merge.data= function() {
+LoadMergeData= function() {
   message("load data...")
   # 0.1 build the common path to the data files
   path<<-paste(getwd(),"/data/UCI HAR Dataset/", sep = "")
@@ -56,7 +56,7 @@ load.merge.data= function() {
 
 
 # 2. Get only the data on mean and std. dev.
-extract.data=function(df){
+ExtractData=function(df){
   # Extracts only the measurements on the mean and standard deviation for each measurement. 
   message("extract data...")
   # 2.1 read the features
@@ -83,19 +83,16 @@ extract.data=function(df){
 
 
 # 3. Uses descriptive activity names to name the activities in the data set
-set.activity.names=function(df){
+SetActivityNames=function(df){
   message("set activity labels...")
   # 3.1 read the activity lables into DF activity.Labels)
   activity.Labels = read.csv(paste(path,"activity_labels.txt", sep=""), sep="", header=FALSE)
   
   # 3.2 set the matching activity label for each row
-  Activity.ID = 1
+  activity.ID = 1
   for (ActivityLabel in activity.Labels$V2) {
-    #df$activity[df$activity == Activity.ID] = ActivityLabel
-    
-    #Data$Activity <- gsub(Activity.ID, ActivityLabel, Data$Activity)
-    df$Activity <- gsub(Activity.ID, ActivityLabel, df$Activity)
-    Activity.ID <- Activity.ID + 1
+    df$activity <- gsub(activity.ID, ActivityLabel, df$activity)
+    activity.ID <- activity.ID + 1
   }
   
   df
@@ -104,27 +101,30 @@ set.activity.names=function(df){
 
 
 
-# 4. Appropriately labels the data set with descriptive variable names.
-descriptive.variables=function(df){
+# 4. Appropriately labels the data set with descriptive variable names following Google's Rguide 
+DescriptiveVariables=function(df){
   message("make descriptive variable names...")
-  # 4.1 make suitable feature names for R using substitutions
-  features[,2] <- gsub('-mean', '.MEAN', features[,2]) # substitutes "-mean" with ".MEAN"
-  features[,2] <- gsub('-std', '.STD', features[,2]) # substitutes "-std" with ".STD"
+  # 4.1 make suitable feature names for R using substitutions 
+  features[,2] <- gsub('-mean()', '.mean', features[,2]) # substitutes "-mean" with ".mean"
+  features[,2] <- gsub('-std()', '.std', features[,2]) # substitutes "-std" with ".std"
+  features[,2] <- gsub('-meanFreq()', '.mean.freq', features[,2]) # substitutes "-meanFreq()" with ".mean.freq"
   features[,2] <- gsub('[-]', '.', features[,2]) # substitutes "-" with "."
   features[,2] <- gsub('[()]', '', features[,2]) # removes "()"
   
   # 4.2 set the column names (as of DF features 2nd column) for DF Data
   colnames(df) <- c(features$V2, "Activity", "Subject")
+  # 4.3 make all names lowercase
+  colnames(df) <- tolower(colnames(df))
   
   df
 }
 
 # 5. Creates a second, independent DF tidy.data with the mean of each variable for each activity and each subject. 
-make.tidy=function(df){
+MakeTidy=function(df){
   message("tidy data...")
   # 5.1 declare Activity and Subject as nominal data
-  df$Activity <- as.factor(df$Activity)
-  df$Subject <- as.factor(df$Subject)
+  df$activity <- as.factor(df$activity)
+  df$subject <- as.factor(df$subject)
   
   #5.2 aggregate DF Data by Activity and Subject while calculating the mean function
   #5.2.1 define the number of colums in DF Data minus the nominal columns (Activity and Subject)
@@ -133,31 +133,34 @@ make.tidy=function(df){
   
   #5.2.2 aggregate and calculate the mean only for the columns containing measured values
   # tidy.Data = aggregate(Data[,c(1:nndc)], by=list(Activity = Data$Activity, Subject=Data$Subject), mean, na.rm=TRUE)
-  tidy <- aggregate(df[,nndc], by=list(Activity = df$Activity, Subject=df$Subject), mean, na.rm=TRUE)
+  tidy <- aggregate(df[,nndc], by=list(activity = df$activity, subject=df$subject), mean, na.rm=TRUE)
   tidy
 }
 
 
 
 # Preparation:
-download.data.set("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip")
+DownloadDataSet("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip")
 
 # 1. Merges the training and the test sets to create one data set.
-Data<-load.merge.data()
+Data<-LoadMergeData()
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-Data<-extract.data(Data)
+Data<-ExtractData(Data)
 
 # 4. Appropriately labels the data set with descriptive variable names. 
-Data<-descriptive.variables(Data)
+Data<-DescriptiveVariables(Data)
 
 # 3. Uses descriptive activity names to name the activities in the data set
-Data<-set.activity.names(Data) # reasonable to be run after labeling because of script design
+Data<-SetActivityNames(Data) # reasonable to be run after labeling because of script design
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-Data<-make.tidy(Data)
+Data<-MakeTidy(Data)
 
 # Completion
 message("write tidy.txt...")
 write.table(Data, "tidy.txt", sep="\t",row.names = F)
 message("done!")
+
+# CodeBook
+write(names(Data), file = "variables.txt", ncolumns = 1)
