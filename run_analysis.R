@@ -2,7 +2,7 @@
 # © Heinrich Krupp 2014 All Rights reserved.
 #
 # global data frames: Data, features
-# gobal values. path, cols.in.scope
+# gobal values: path, cols.in.scope
 # functions:
 # - DownloadDataSet()
 # - LoadMergeData()
@@ -38,21 +38,27 @@ LoadMergeData= function() {
   path<<-paste(getwd(),"/data/UCI HAR Dataset/", sep = "")
   
   # 0.2 read X_train.txt into DF "train.dat"
+  message("  read X_train.txt...")
   train.dat = read.csv(paste(path,"train/X_train.txt",sep=""), sep="", header=FALSE)
   
   # 0.3 append Y_train.txt to DF "train.dat" as variable 562
+  message("  read Y_train.txt...")
   train.dat[,ncol(train.dat)+1] = read.csv(paste(path,"train/Y_train.txt",sep=""), sep="", header=FALSE)
   
   # 0.4 append subject_train.txt to DF "train.dat" as variable 563
+  message("  read subject_train.txt...")
   train.dat[,ncol(train.dat)+1] = read.csv(paste(path,"train/subject_train.txt",sep=""), sep="", header=FALSE)
   
   # 0.5 read X_test.txt into DF "test.dat"
+  message("  read X_test.txt...")
   test.dat = read.csv(paste(path,"test/X_test.txt",sep=""), sep="", header=FALSE)
   
   # 0.3 append Y_test.txt to DF "test.dat" as variable 562
+  message("  read Y_test.txt...")
   test.dat[,ncol(test.dat)+1] = read.csv(paste(path,"test/Y_test.txt",sep=""), sep="", header=FALSE)
   
   # 0.4 append subject_test.txt to DF "test.dat" as variable 563
+  message("  read subject_test.txt...")
   test.dat[,ncol(test.dat)+1] = read.csv(paste(path,"test/subject_test.txt",sep=""), sep="", header=FALSE)
   
   
@@ -170,7 +176,7 @@ Data<-MakeTidy(Data)
 # Completion
 message("write tidy.txt...")
 write.table(Data, "tidy.txt", sep="\t",row.names = F)
-message("done!")
+message("done! find the tidy data in file tidy.txt")
 
-# CodeBook
+# for CodeBook
 write(names(Data), file = "variables.txt", ncolumns = 1)
