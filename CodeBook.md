@@ -2,7 +2,7 @@ Getting and Cleaning Data (Coursera). Course Project Codebook
 ==============================================================
 
 
-## Original Data [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.html)
+## Original (raw) Data from [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.html)
 
 Contains Human Activity Recognition database built from the recordings of 30 subjects performing 
 activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
@@ -25,8 +25,14 @@ Contains aggregated mean values of all mean and standard deviation values from o
 
 ## Attribute Information:
 For each record in the tidy data it is provided: 
-- Its activity label (one out of 6 different activities)
-- An identifier of the subject who carried out the experiment (one out of 30 different subjects)
+- Its activity label (one out of 6 different activities):
+  - LAYING
+  - SITTING
+  - STANDING
+  - WALKING
+  - WALKING_DOWNSTAIR
+  - WALKING_UPSTAIRS
+- An identifier of the subject who carried out the experiment (30 different subjects, IDs ranging from 1-30)
 - 79 features with the
   - Mean of Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
   - Mean of Triaxial Angular velocity from the gyroscope. 
