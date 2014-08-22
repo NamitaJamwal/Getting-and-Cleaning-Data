@@ -21,12 +21,12 @@ The original data set is split into training and test sets where each partition 
 * the subject identifiers
 
 # Tidy Data
-Contains aggregated mean values of all mean and standard deviation values from original data set grouped by activity and subject.
+Contains aggregated mean values of all mean and standard deviation values from original data set grouped by activity  and subject, resulting in total 180 records.
 
 ## Attribute Information:
 For each record in the tidy data it is provided: 
-- Its activity label. 
-- An identifier of the subject who carried out the experiment.
+- Its activity label (one out of 6 different activities)
+- An identifier of the subject who carried out the experiment (one out of 30 different subjects)
 - 79 features with the
   - Mean of Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
   - Mean of Triaxial Angular velocity from the gyroscope. 
