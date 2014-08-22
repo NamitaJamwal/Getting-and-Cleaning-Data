@@ -143,7 +143,7 @@ MakeTidy=function(df){
   df$subject <- as.factor(df$subject)
   
   #5.2 aggregate DF Data by Activity and Subject while calculating the mean function
-  #5.2.1 define the number of colums in DF Data minus the nominal columns (Activity and Subject)
+  #5.2.1 define the number of colums in DF Data minus the nominal columns (activity and subject)
   countnndc = ncol(df)-2 # the count of colums with non nominal data
   nndc = c(1:countnndc) # the colums with non nominal data
   

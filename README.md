@@ -49,7 +49,9 @@ Following the assignment both training and test data sets shall be merged.
 Due to the fact that they reside in different subfolders the script addresses this while concatenating the common path with the individual subfolder and filenames into global value "path".
 Load the main file X_train.txt (resp. X_test.txt) into a data frame train.dat (resp. test.dat)
 then append the Y_train.txt( resp. Y_test.txt) and subject_train.txt(resp. subject_test.txt) to the data frames using read.csv()
-Once all measurements are loaded, the two data frames train.dat and test.dat can be merged into a single global data frame called "Data"
+Once all measurements are loaded, the two data frames train.dat and test.dat can be merged into a single data frame 
+
+return result
 
 ## 2. Variable Selection 
 Function: ExtractData(df)
@@ -62,6 +64,7 @@ Thus the features in scope are given and the resulting vector can be used to red
 To be able to reduce the DF "Data" add the columns ID for variable "activity" and "subject" to the vector col.in.scope
 because they need to be kept for later aggregation.
 Once that's done the col.in.scope vector can be used to remove the obsolete columns out of the input data frame.
+
 return result
 
 ## 3. Use Descriptive activity names (due to script design will be performed after step 4.)
@@ -83,6 +86,7 @@ For better readability and the author choose to make following replacements (fol
 * substitute "-" with "."
 * remove "()"
 * convert upper to lower case
+
 return result
 
 
@@ -91,11 +95,12 @@ Function:  MakeTidy(df)
 
 Declare the variable "Activity" and "Subject" as noiminal data with function as.factor()
 To avoid errors on aggregation declare the columns containing numeric data (which are all except the last two columns "activity" and "subject")
-Then aggregate by grouping on "activity" and "subject" calculating the mean for each variable and return the result
+Then aggregate by grouping on "activity" and "subject" calculating the mean for each (numeric) variable and return the result
+
 return result
 
 ## Completion
-Finally write tidy.Data into the file "tidy.txt" using tabs as separators and avoids creating line numbers.codebook(Data)
+Write global DF tidy.Data into the file "tidy.txt" using tabs as separators and avoids creating line numbers.codebook(Data)
  
  
 # See `CodeBook.md` for details on result and the variables
