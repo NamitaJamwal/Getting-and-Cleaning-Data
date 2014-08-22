@@ -39,7 +39,7 @@ Source: https://class.coursera.org/getdata-006/human_grading/index
 Function: DownloadData.set(url)
 
 Check if folder "data" exists in working directory, or create it.
-Download and extract the zip file containing the dataset [FUCI HAR Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) into fodler "data"
+Download and extract the zip file containing the dataset [FUCI HAR Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) into folder "data"
 
 
 ## 1. Loading and Merging the test sets
@@ -58,8 +58,8 @@ Function: ExtractData(df)
 According to the assignment only the features that contain mean and standard deviation are in scope.
 Read the file features.txt into a global data frame called "features" using read.csv().
 Perform a regex search for strings containing "-mean" or "-std" on the features list and store the result in a global vector called cols.in.scope
-Thus the features in scope are given and the resulting vector can now be used to reduce DF "feature"
-Now to be able to reduce the DF "Data" add the columns ID for variable "Activity" and "Subject" to the vector col.in.scope
+Thus the features in scope are given and the resulting vector can be used to reduce DF "feature"
+To be able to reduce the DF "Data" add the columns ID for variable "activity" and "subject" to the vector col.in.scope
 because they need to be kept for later aggregation.
 Once that's done the col.in.scope vector can be used to remove the obsolete columns out of the input data frame.
 return result
@@ -75,21 +75,24 @@ return result
 ## 4. Label the data set with descriptive variable names
 Function:  DescriptiveVariables(df)
 
-Now alter the variable names with the use of gsub() function which allows for quick and easy string replacement.
-For better readability the author choose to make following replacements:
-* substitute "-mean" with ".MEAN"
-* substitute "-std" with ".STD"
+Alter the variable names with the use of gsub() function.
+For better readability and the author choose to make following replacements (following the Rguide):
+* substitute "-mean" with ".mean"
+* substitute "-std" with ".std"
+* substitute "-meanFreq()" with ".mean.freq"
 * substitute "-" with "."
 * remove "()"
+* convert upper to lower case
 return result
 
 
 ## 5. Creating the tidy data set
 Function:  MakeTidy(df)
 
-Firstdeclare the variable "Activity" and "Subject" as noiminal data with function as.factor()
-To avoid errors on aggregation declare the columns containing numeric data (which are all except the last two columns "Activity" and "Subject")
-Then aggregate by grouping on "Activity" and "Subject" calculating the mean for each variable and return the result
+Declare the variable "Activity" and "Subject" as noiminal data with function as.factor()
+To avoid errors on aggregation declare the columns containing numeric data (which are all except the last two columns "activity" and "subject")
+Then aggregate by grouping on "activity" and "subject" calculating the mean for each variable and return the result
+return result
 
 ## Completion
 Finally write tidy.Data into the file "tidy.txt" using tabs as separators and avoids creating line numbers.codebook(Data)
