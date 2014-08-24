@@ -21,7 +21,7 @@ The original data set is split into training and test sets where each partition 
 * the subject identifiers
 
 # Tidy Data
-Contains aggregated mean values of all mean and standard deviation values from original data set grouped by activity  and subject, resulting in total 180 records.
+Contains aggregated mean values of all mean and standard deviation values from original data set grouped by activity  and subject, resulting in a total of 180 records.
 
 ## Attribute Information:
 For each record in the tidy data it is provided: 
@@ -32,10 +32,11 @@ For each record in the tidy data it is provided:
   - WALKING
   - WALKING_DOWNSTAIR
   - WALKING_UPSTAIRS
-- An identifier of the subject who carried out the experiment (30 different subjects, IDs ranging from 1-30)
+- An identifier of the subject who carried out the experiment (30 different subjects, IDs ranging from {1,2,3,...,30})
 - 79 features with the
   - Mean of Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
   - Mean of Triaxial Angular velocity from the gyroscope. 
+  - numerical value ranging in [-1,1]
 
 ## Variable names
 - activity
@@ -86,39 +87,39 @@ For each record in the tidy data it is provided:
 - fbodyacc.std.x
 - fbodyacc.std.y
 - fbodyacc.std.z
-- fbodyacc.meanfreq.x
-- fbodyacc.meanfreq.y
-- fbodyacc.meanfreq.z
+- fbodyacc.mean.freq.x
+- fbodyacc.mean.freq.y
+- fbodyacc.mean.freq.z
 - fbodyaccjerk.mean.x
 - fbodyaccjerk.mean.y
 - fbodyaccjerk.mean.z
 - fbodyaccjerk.std.x
 - fbodyaccjerk.std.y
 - fbodyaccjerk.std.z
-- fbodyaccjerk.meanfreq.x
-- fbodyaccjerk.meanfreq.y
-- fbodyaccjerk.meanfreq.z
+- fbodyaccjerk.mean.freq.x
+- fbodyaccjerk.mean.freq.y
+- fbodyaccjerk.mean.freq.z
 - fbodygyro.mean.x
 - fbodygyro.mean.y
 - fbodygyro.mean.z
 - fbodygyro.std.x
 - fbodygyro.std.y
 - fbodygyro.std.z
-- fbodygyro.meanfreq.x
-- fbodygyro.meanfreq.y
-- fbodygyro.meanfreq.z
+- fbodygyro.mean.freq.x
+- fbodygyro.mean.freq.y
+- fbodygyro.mean.freq.z
 - fbodyaccmag.mean
 - fbodyaccmag.std
 - fbodyaccmag.meanfreq
 - fbodybodyaccjerkmag.mean
 - fbodybodyaccjerkmag.std
-- fbodybodyaccjerkmag.meanfreq
+- fbodybodyaccjerkmag.mean.freq
 - fbodybodygyromag.mean
 - fbodybodygyromag.std
-- fbodybodygyromag.meanfreq
+- fbodybodygyromag.mean.freq
 - fbodybodygyrojerkmag.mean
 - fbodybodygyrojerkmag.std
-- fbodybodygyrojerkmag.meanfreq
+- fbodybodygyrojerkmag.mean.freq
 
 
 © Heinrich Krupp 2014 All Rights reserved.

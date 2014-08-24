@@ -23,27 +23,27 @@ Appropriately labels the data set with descriptive variable names.
 Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 Good luck!
 
-Source: https://class.coursera.org/getdata-006/human_grading/index
+> Source: https://class.coursera.org/getdata-006/human_grading/index
 
-# This README.md describes how run_analysis.R script works.
-## R script run_analysis.R does the following.
+## R script run_analysis.R abstract:
 > 1. Merges the training and the test sets to create one data set.
 > 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 > 3. Uses descriptive activity names to name the activities in the data set
 > 4. Appropriately labels the data set with descriptive variable names. 
 > 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-Source: https://class.coursera.org/getdata-006/human_grading/index
+> Source: https://class.coursera.org/getdata-006/human_grading/index
 
-## Preparation
-Function: DownloadData.set(url)
+## R script run_analysis.R details:
+### Preparation
+Function: `DownloadData.set(url)`
 
 Check if folder "data" exists in working directory, or create it.
 Download and extract the zip file containing the dataset [FUCI HAR Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) into folder "data"
 
 
-## 1. Loading and Merging the test sets
-Function: LoadMergeData()
+### 1. Loading and Merging the test sets
+Function: `LoadMergeData()`
 
 Following the assignment both training and test data sets shall be merged.
 Due to the fact that they reside in different subfolders the script addresses this while concatenating the common path with the individual subfolder and filenames into global value "path".
@@ -53,8 +53,8 @@ Once all measurements are loaded, the two data frames train.dat and test.dat can
 
 return result
 
-## 2. Variable Selection 
-Function: ExtractData(df)
+### 2. Variable Selection 
+Function: `ExtractData(df)`
 
 
 According to the assignment only the features that contain mean and standard deviation are in scope.
@@ -67,16 +67,16 @@ Once that's done the col.in.scope vector can be used to remove the obsolete colu
 
 return result
 
-## 3. Use Descriptive activity names (due to script design will be performed after step 4.)
-Function: SetActivityNames(df)
+### 3. Use Descriptive activity names (due to script design will be performed after step 4.)
+Function: `SetActivityNames(df)`
 
 The activity labels are declared in the file `activity_labels.txt`.
 Load file into a DF "activity.Labels" using read.csv().
 Loop through input data frame and replace activity IDs with their matching lables.
 return result
 
-## 4. Label the data set with descriptive variable names
-Function:  DescriptiveVariables(df)
+### 4. Label the data set with descriptive variable names
+Function:  `DescriptiveVariables(df)`
 
 Alter the variable names with the use of gsub() function.
 For better readability and the author choose to make following replacements (following the Rguide):
@@ -90,22 +90,23 @@ For better readability and the author choose to make following replacements (fol
 return result
 
 
-## 5. Creating the tidy data set
-Function:  MakeTidy(df)
+### 5. Creating the tidy data set
+Function:  `MakeTidy(df)`
 
-Declare the variable "Activity" and "Subject" as noiminal data with function as.factor()
-To avoid errors on aggregation declare the columns containing numeric data (which are all except the last two columns "activity" and "subject")
-Then aggregate by grouping on "activity" and "subject" calculating the mean for each (numeric) variable and return the result
+Declare the variable `activity` and `subject` as noiminal data with R function `as.factor()`
+To avoid errors on aggregation use subset of DF Data (the columns containing numeric data, which are all except the last two columns `activity` and `subject`)
+Then aggregate by grouping on "activity" and "subject" calculating the mean for each (numeric) variable and 
+return the result.
 
-return result
-
-## Completion
-Write global DF Data into the file `tidy.txt` using tabs as separators and avoid line numbers.
+### Completion
+Write global DF Tidy.Data into the file `tidy.txt` using tabs as separators and avoid line numbers.
  
  
 ## See `CodeBook.md` for details on result and the variables
 
-# Coding conventions
+## Tested for "R version 3.1.0 (2014-04-10)" on "x86_64-w64-mingw32"
+
+## Coding conventions
 
 [Google R Styde Guide](http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml).
 

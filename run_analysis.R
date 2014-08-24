@@ -8,7 +8,7 @@
 
 # © Heinrich Krupp 2014 All Rights reserved.
 #
-# global data frames: Data, features
+# global data frames: Data, Tidy.Data, features
 # gobal values: path, cols.in.scope
 # functions:
 # - DownloadDataSet()
@@ -20,7 +20,7 @@
 
 
 # Download and unzip the data set from the given source and extract it locally
-DownloadDataSet= function(url) {
+DownloadDataSet = function(url) {
   if (!file.exists("data")) {
     #  Check for existing data directory or create it
     message("create data folder...")
@@ -39,7 +39,7 @@ DownloadDataSet= function(url) {
 
 
 # 0. load the train and test files 
-LoadMergeData= function() {
+LoadMergeData = function() {
   message("load data...")
   # 0.1 build the common path to the data files
   path<<-paste(getwd(),"/data/UCI HAR Dataset/", sep = "")
@@ -106,7 +106,7 @@ ExtractData=function(df){
 
 
 # 3. Uses descriptive activity names to name the activities in the data set
-SetActivityNames=function(df){
+SetActivityNames = function(df){
   message("set activity labels...")
   # 3.1 read the activity lables into DF activity.Labels)
   activity.Labels = read.csv(paste(path,"activity_labels.txt", sep=""), sep="", header=FALSE)
@@ -125,12 +125,12 @@ SetActivityNames=function(df){
 
 
 # 4. Appropriately labels the data set with descriptive variable names following Google's Rguide 
-DescriptiveVariables=function(df){
+DescriptiveVariables = function(df){
   message("make descriptive variable names...")
   # 4.1 make suitable feature names for R using substitutions 
+  features[,2] <- gsub('-meanFreq()', '.mean.freq', features[,2]) # substitutes "-meanFreq()" with ".mean.freq"
   features[,2] <- gsub('-mean()', '.mean', features[,2]) # substitutes "-mean" with ".mean"
   features[,2] <- gsub('-std()', '.std', features[,2]) # substitutes "-std" with ".std"
-  features[,2] <- gsub('-meanFreq()', '.mean.freq', features[,2]) # substitutes "-meanFreq()" with ".mean.freq"
   features[,2] <- gsub('[-]', '.', features[,2]) # substitutes "-" with "."
   features[,2] <- gsub('[()]', '', features[,2]) # removes "()"
   
@@ -143,7 +143,7 @@ DescriptiveVariables=function(df){
 }
 
 # 5. Creates a second, independent DF tidy.data with the mean of each variable for each activity and each subject. 
-MakeTidy=function(df){
+MakeTidy = function(df){
   message("tidy data...")
   # 5.1 declare Activity and Subject as nominal data
   df$activity <- as.factor(df$activity)
@@ -166,24 +166,25 @@ MakeTidy=function(df){
 DownloadDataSet("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip")
 
 # 1. Merges the training and the test sets to create one data set.
-Data<-LoadMergeData()
+Data <- LoadMergeData()
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-Data<-ExtractData(Data)
+Data <- ExtractData(Data)
 
 # 4. Appropriately labels the data set with descriptive variable names. 
-Data<-DescriptiveVariables(Data)
+Data <- DescriptiveVariables(Data)
 
 # 3. Uses descriptive activity names to name the activities in the data set
-Data<-SetActivityNames(Data) # reasonable to be run after labeling because of script design
+Data <- SetActivityNames(Data) # reasonable to be run after labeling because of script design
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-Data<-MakeTidy(Data)
+Tidy.Data <- MakeTidy(Data)
 
 # Completion
 message("write tidy.txt...")
-write.table(Data, "tidy.txt", sep="\t",row.names = F)
-message("done! find the tidy data in file tidy.txt")
+write.table(Tidy.Data, "tidy.txt", sep="\t",row.names = F)
+message("Done!")
+message("Find the tidy data in file: \"",paste(getwd(),"/tidy.txt\"",sep=""))
 
 # for CodeBook
 write(names(Data), file = "variables.txt", ncolumns = 1)
